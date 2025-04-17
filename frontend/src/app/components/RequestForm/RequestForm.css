@@ -1,0 +1,445 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/* -- reset -- */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+button {
+  text-decoration: none !important;
+}
+/* === common === */
+* {
+  box-sizing: border-box;
+}
+html {
+  font-size: 10px;
+}
+body {
+  font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+    "ヒラギノ角ゴ Pro W3", "Meiryo", "MS PGothic", sans-serif;
+  color: #323232;
+  font-size: 1.8rem;
+  line-height: normal;
+}
+p {
+  margin-bottom: 0.8em;
+}
+
+/* --main-- */
+.main {
+  margin: 20px auto;
+  padding: 0 min(6.2%, 30px);
+  max-width: 1000px;
+}
+.main a {
+  text-decoration: none;
+}
+.pagetop {
+  color: #337aba;
+  cursor: pointer;
+  display: block;
+  margin: 30px 0 0 auto;
+  text-decoration: none;
+  transition: opacity 0.3s;
+  width: fit-content;
+}
+/* --aside-- */
+.asideInfo {
+  border: 1px solid #707070;
+  margin: 0 auto;
+  max-width: calc(100% - 40px);
+  padding: 10px;
+  width: fit-content;
+}
+
+/* === contens === */
+.formName {
+  border-bottom: solid 20px #dcdcdc;
+  border-top: solid 20px #dcdcdc;
+  font-size: 3.6rem;
+  font-weight: bold;
+  line-height: 1.1;
+  margin-bottom: 0.8em;
+  vertical-align: text-bottom;
+  padding: 20px 0 18px;
+}
+.formName_require {
+  color: #ff0000;
+  font-size: 2rem;
+  margin-left: 1em;
+}
+.formText {
+  padding-left: 1em;
+  text-indent: -1em;
+}
+.noteText {
+  margin-bottom: 1.5em;
+}
+/* uploadArea */
+.uploadArea {
+  align-items: center;
+  background: #f0f0f0 0% 0% no-repeat padding-box;
+  border: 1px solid #dcdcdc;
+  display: flex;
+  min-height: 300px;
+  padding: 20px;
+}
+.uploadAreaFlow {
+  width: 100%;
+}
+.uploadAreaFlow_inner {
+  align-items: stretch;
+  display: flex;
+  justify-content: space-between;
+}
+.uploadAreaFlow_col {
+  width: calc(50% - 35px);
+}
+.uploadAreaFlow_arrow {
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+.uploadAreaFlow_arrow::before,
+.uploadAreaFlow_arrow::after {
+  display: block;
+  content: "";
+}
+.uploadAreaFlow_arrow::before {
+  background-color: #dcdcdc;
+  height: 40px;
+  width: 15px;
+}
+.uploadAreaFlow_arrow::after {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-top: 40px solid transparent;
+  border-bottom: 40px solid transparent;
+  border-left: 20px solid #dcdcdc;
+  border-right: 0;
+}
+.uploadAreaFlow_ttl {
+  background: #fff;
+  font-size: clamp(15px, 4.2vw, 2rem);
+  line-height: 1.1;
+  margin-bottom: 20px;
+  padding: 5px 0;
+  text-align: center;
+}
+.uploadAreaFlow_img {
+  aspect-ratio: 158 / 210;
+  position: relative;
+  width: 100%;
+}
+.uploadAreaFlow_img img {
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  margin: auto;
+  object-fit: contain;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+}
+.uploadAreaBtn {
+  align-items: center;
+  appearance: none;
+  background-color: #215487;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: bold;
+  justify-content: center;
+  line-height: 1.1;
+  margin: 20px auto;
+  padding: 14px;
+  text-align: center;
+  transition: opacity 0.3s;
+  max-width: 80%;
+  width: 200px;
+}
+.uploadAreaBtn > input {
+  display: none;
+}
+.uploadAreaBtn .icon-photo {
+  margin-right: 10px;
+  vertical-align: middle;
+  width: 21px;
+}
+/* resultArea */
+.resultArea {
+  margin-top: 28px;
+  padding: 20px;
+  position: relative;
+  text-align: left;
+}
+.resultArea:before {
+  border-style: solid;
+  border-left: 18px solid transparent;
+  border-right: 18px solid transparent;
+  border-top: 0;
+  content: "";
+  height: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: -18px;
+  width: 0;
+}
+
+.uploadAreaLoading {
+  aspect-ratio: 158 / 210;
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  /* width: 130px; */
+}
+.uploadAreaLoading img {
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  margin: auto;
+  object-fit: contain;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  /* vertical-align: middle; */
+  -webkit-animation: animation03 4s linear infinite;
+  animation: animation03 4s linear infinite;
+  /* width: 100%; */
+}
+
+@-webkit-keyframes animation03 {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes animation03 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.resultArea.-clear {
+  background-color: #e8f3fd;
+  color: #215487;
+}
+.resultArea.-clear:before {
+  border-bottom: 18px solid #e8f3fd;
+}
+.resultArea.-error {
+  background-color: #fde8e8;
+  color: #ff0000;
+}
+.resultArea.-error:before {
+  border-bottom: 18px solid #fde8e8;
+}
+
+/* buttonArea */
+.buttonArea {
+  margin-top: 30px;
+  text-align: center;
+}
+.downloadBtn {
+  margin: 0 auto;
+}
+.btnBlue {
+  align-items: center;
+  appearance: none;
+  background-color: #215487;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  color: #fff;
+  flex-direction: column;
+  font-size: clamp(16px, 5.1vw, 1.9rem);
+  font-weight: bold;
+  justify-content: center;
+  line-height: 1.2;
+  min-height: 72px;
+  margin: 20px auto;
+  max-width: 100%;
+  padding: 10px 15px;
+  text-align: center;
+  transition: opacity 0.3s;
+  width: 280px;
+}
+.btnBlue .font-s {
+  font-size: 0.75em;
+}
+.btnBlue:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+.btnLightblue {
+  appearance: none;
+  background-color: #84b3e1;
+  border: none;
+  cursor: pointer;
+  display: block;
+  color: #323232;
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 1.1;
+  max-width: 100%;
+  margin: 20px auto;
+  padding: 25px;
+  text-align: center;
+  transition: opacity 0.3s;
+  width: 250px;
+}
+
+@media screen and (max-width: 640px) {
+}
+/* hoverの設定 */
+@media (hover: hover) {
+  .pagetop:hover,
+  .uploadAreaBtn:hover,
+  .btnBlue:hover,
+  .btnLightblue:hover {
+    opacity: 0.8;
+  }
+  .footerLink_item a:hover {
+    color: #215487;
+    text-decoration: underline;
+  }
+}
+
+.messageloading {
+  display: flex; /* フレックスボックスを有効化 */
+  justify-content: center; /* 横方向の中央揃え */
+  align-items: center; /* 縦方向の中央揃え */
+}

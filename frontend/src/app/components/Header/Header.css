@@ -1,0 +1,8 @@
+/* --header-- */
+.header {
+  padding: 20px min(6.2%, 30px);
+}
+.header h1 {
+  font-size: 2.1rem;
+  line-height: 1.1;
+}
