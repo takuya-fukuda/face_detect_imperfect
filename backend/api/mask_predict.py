@@ -94,11 +94,11 @@ def mask_predict(request):
         logger.error("AI推論後の後処理で想定外のエラー："+str(e))
         return handle_error("AI推論後の後処理で想定外のエラー：", img_path, result_save_path), 400
 
-    #finally:
+    finally:
         #インプットイメージの削除
-        # if img_path and os.path.exists(img_path):
-        #     os.remove(img_path)
+        if img_path and os.path.exists(img_path):
+            os.remove(img_path)
 
         #OCR結果イメージの削除
-        # if result_save_path and os.path.exists(result_save_path):
-        #     os.remove(result_save_path)
+        if result_image_path and os.path.exists(result_image_path):
+            os.remove(result_image_path)
