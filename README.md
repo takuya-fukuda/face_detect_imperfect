@@ -7,6 +7,7 @@
 まずはマスクの検出～
 ![判定前](./sample_image.jpg)
 ![判定後](./sample_image2.jpg)
+![判定後](./sample_image3.jpg)
 
 ## frontend
 
