@@ -29,7 +29,7 @@
 
 （注意）
 
-## Mask 判定に使用した Git
+## Mask 判定に使用した AI モデル
 
 https://github.com/Karan-Malik/FaceMaskDetector  
 face_mask_detection をファイチューニングや学習をさせたい場合、Python の環境は 3.913 である必要がある。
