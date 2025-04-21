@@ -59,11 +59,12 @@ Python ファイル名と Flask アプリケーション名：run:app
 | -- | -- |
 | run.py | API 起動用ファイル |
 | models* | モデルファイルが格納される |
-| api/config* | DB などの設定ファイルが格納される |
+| api/config/* | DB などの設定ファイルが格納される |
 | api/models.py | DB 情報の定義ファイル |
 | api/**init**.py | アプリケーションルート設定ファイル |
 | api/mask_predict.py | /image/の全体処理が記載されたファイル。前処理 ⇒ 推論 ⇒ 後処理の原則に基づき記載 |
 | api/preparation.py | 前処理用関数定義ファイル。mask_predict の前処理部分で参照される |
-| api/facemask_predict.py | 推論用関数。mask_predict の推論時に呼び出し |
+| api/facemask/\* | mask 検出に必要な推論スクリプトが格納される |
+| api/facerecognition/\* | 顔認証に必要な推論スクリプトが格納される |
 | api/postprocess.py | 後処理用関数定義ファイル。mask_predict から後処理部分で参照される |
 | api/error.py | エラーハンドリング用の関数定義ファイル。Except のエラー時に参照される |

@@ -1,3 +1,6 @@
 *__pycache__/
 *api/__pycache__/
 *api/config/__pycache__/
+*api/facerecognition/backbones/__pycache__/
+*api/facerecognition/face_alignment/_pycache__/
+*api/facerecognition/face_alignment/mtcnn_pytorch/src/_pycache__/

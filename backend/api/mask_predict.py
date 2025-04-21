@@ -5,7 +5,7 @@ from pathlib import Path
 from flask import jsonify
 from .preprocess import load_image, extension_split, heic_convert, filename_convert
 # from .paddleocr_predict import OCRProcessor
-from .facemask_predict import mask_judge
+from api.facemask.facemask_predict import mask_judge
 from .error import handle_error
 import logging
 from dotenv import load_dotenv
