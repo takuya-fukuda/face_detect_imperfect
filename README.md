@@ -28,6 +28,10 @@
 | OS             | Windows11 or Ubuntu    |
 
 （注意）
+
+## Mask 判定に使用した Git
+
+https://github.com/Karan-Malik/FaceMaskDetector  
 face_mask_detection をファイチューニングや学習をさせたい場合、Python の環境は 3.913 である必要がある。
 また pip install -r requirement.txt でパッケージをインストールしてもエラー出るので、スクリプト流しながら手動でインストールした。
 
