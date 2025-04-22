@@ -4,10 +4,16 @@ from face_alignment import align
 from backbones import get_model
 from torch.nn.functional import normalize, cosine_similarity
 
+'''
+face_alignmentとbackbonesはライブラリとして使用しているようなので、
+Flaskで扱う場合は、ファルダごと、venvのLib/site-packagesの中に入れてください。
+'''
+
+
 # load model
 model_name="edgeface_xs_gamma_06" # or edgeface_xs_gamma_06
 model=get_model(model_name)
-checkpoint_path=f'checkpoints/{model_name}.pt'
+checkpoint_path=f'./api/facerecognition/checkpoints/{model_name}.pt'
 #model.load_state_dict(torch.load(checkpoint_path, map_location='cpu')).eval()
 state_dict = torch.load(checkpoint_path, map_location='cpu')
 model.load_state_dict(state_dict)
@@ -20,6 +26,7 @@ transform = transforms.Compose([
 
 def get_feature(path):
     aligned = align.get_aligned_face(path) # align face
+    #aligned = get_aligned_face(path) # align face
     if aligned is None:
         print("顔が検出できませんでした")
     else:
@@ -35,11 +42,15 @@ def get_feature(path):
 
     return embedding
 
-path1 = './face1.jpg'
-path2 = './face2.jpg'
+def face_similarity(path1, path2):
+    sim = cosine_similarity(get_feature(path1), get_feature(path2)).item()
+    cos = f"Similarity: {sim:.4f}"
 
-# res = get_feature(path1)
-# print(res)
+    return cos
 
-sim = cosine_similarity(get_feature(path1), get_feature(path2)).item()
-print(f"Similarity: {sim:.4f}")
+
+
+# path1 = './face1.jpg'
+# path2 = './face2.jpg'
+# sim = cosine_similarity(get_feature(path1), get_feature(path2)).item()
+# print(f"Similarity: {sim:.4f}")
