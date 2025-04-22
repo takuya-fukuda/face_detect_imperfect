@@ -4,7 +4,13 @@
 
 顔写真不備検出用アプリサンプル標準化
 顔写真の不備を検出できるようにするアプリの標準化
-まずはマスクの検出～
+まずはマスクの検出～機能拡張中
+
+拡張予定機能
+・表情分析機能
+・眼鏡検出機能
+・顔の類似度比較（替え玉受験対策）
+
 ![判定前](./sample_image.jpg)
 ![判定後](./sample_image2.jpg)
 ![判定後](./sample_image3.jpg)
@@ -34,6 +40,11 @@
 https://github.com/Karan-Malik/FaceMaskDetector  
 face_mask_detection をファイチューニングや学習をさせたい場合、Python の環境は 3.913 である必要がある。
 また pip install -r requirement.txt でパッケージをインストールしてもエラー出るので、スクリプト流しながら手動でインストールした。
+
+## 顔類似度判定に使用した AI モデル
+
+モデル名：edgeface
+https://github.com/otroshi/edgeface/tree/main
 
 ## コーディング規約
 
