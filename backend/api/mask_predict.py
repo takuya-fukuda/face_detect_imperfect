@@ -3,7 +3,7 @@ import shutil
 import base64
 from pathlib import Path
 from flask import jsonify
-from .preprocess import load_image, extension_split, heic_convert, filename_convert
+from .preprocess import preprocess_default
 # from .paddleocr_predict import OCRProcessor
 from api.facemask.facemask_predict import mask_judge
 from .error import handle_error
@@ -18,42 +18,18 @@ logger = logging.getLogger(__name__)
 
 def mask_predict(request):
     '''前処理'''
-    # 実行開始時間を記録
-    start_time = time.time()
-    
-    img_path=None #Except部分でエラーが出るので初期化
-    result_save_path=None #Except部分でエラーが出るので初期化
     try:
-        #ファイルのロード
-        img_path, filename = load_image(request)
+        # 実行開始時間を記録
+        start_time = time.time()
         
-        logger.info(img_path)
+        img_path=None #Except部分でエラーが出るので初期化
+        result_save_path=None #Except部分でエラーが出るので初期化
+        if 'file' not in request.files:
+            return None, None
 
-        # ファイルのロードに失敗した場合の処理
-        if img_path is None:
-            logger.error("ファイルが空です")
-            return jsonify({"message": 'ファイルが空です', "race": "", "date": "", "sum": "", "uid": "", "image": ""}), 400
-
-        # ファイル名チェック
-        if filename == '' or filename is None:
-            logger.error("ファイル名が空です")
-            return jsonify({"message": 'ファイル名が空です', "race": "", "date": "", "sum": "", "uid": "", "image": ""}), 400
-   
-        #拡張子チェック
-        ext = extension_split(img_path)
-        logger.info("拡張子:" + ext)
-        if ext.lower() not in [".jpeg", ".jpg", ".png", ".heic"]:
-            logger.error('AIがファイル拡張子に対応していません')
-            return jsonify({"message": 'AIがファイル拡張子に対応していません', "race": "", "date": "", "sum": "", "uid": "", "image": ""}), 400
-
-        #HEICのJPEG変換
-        if ext == ".HEIC":
-            img_path = heic_convert(img_path)
-            logger.info("from heic to jpeg:" + img_path)
-
-        #ファイル名の変更と上書き
-        img_path = filename_convert(img_path)
-        logger.info("file rename " + img_path)
+        # 前処理
+        file = request.files['file']
+        img_path, filename = preprocess_default(file)
 
     except Exception as e:
         logger.error("前処理部分での想定外のエラー："+str(e))

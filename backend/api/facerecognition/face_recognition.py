@@ -9,48 +9,29 @@ face_alignmentとbackbonesはライブラリとして使用しているような
 Flaskで扱う場合は、ファルダごと、venvのLib/site-packagesの中に入れてください。
 '''
 
-
-# load model
-model_name="edgeface_xs_gamma_06" # or edgeface_xs_gamma_06
-model=get_model(model_name)
-checkpoint_path=f'./api/facerecognition/checkpoints/{model_name}.pt'
-#model.load_state_dict(torch.load(checkpoint_path, map_location='cpu')).eval()
-state_dict = torch.load(checkpoint_path, map_location='cpu')
-model.load_state_dict(state_dict)
-model.eval()
-
-transform = transforms.Compose([
+#クラス化
+class FaceRecognizer:
+    def __init__(self, model_name="edgeface_xs_gamma_06"):
+        self.model = get_model(model_name)
+        checkpoint_path = f'./api/facerecognition/checkpoints/{model_name}.pt'
+        state_dict = torch.load(checkpoint_path, map_location='cpu')
+        self.model.load_state_dict(state_dict)
+        self.model.eval()
+        self.transform = transforms.Compose([
             transforms.ToTensor(),
-            transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5]),
-            ])
+            transforms.Normalize(mean=[0.5]*3, std=[0.5]*3)
+        ])
 
-def get_feature(path):
-    aligned = align.get_aligned_face(path) # align face
-    #aligned = get_aligned_face(path) # align face
-    if aligned is None:
-        print("顔が検出できませんでした")
-    else:
-        print("顔検出成功。aligned.jpg に保存しました")
-    transformed_input = transform(aligned) # preprocessing
-    transformed_input = transformed_input.unsqueeze(0)  # [1, 3, 112, 112]
+    def get_feature(self, image_path):
+        aligned = align.get_aligned_face(image_path)
+        if aligned is None:
+            raise ValueError("顔が検出できませんでした")
+        tensor = self.transform(aligned).unsqueeze(0)
+        with torch.no_grad():
+            return normalize(self.model(tensor))
 
-    with torch.no_grad():
-        embedding = normalize(model(transformed_input))  # L2正規化
-
-    # extract embedding
-    #embedding = model(transformed_input)
-
-    return embedding
-
-def face_similarity(path1, path2):
-    sim = cosine_similarity(get_feature(path1), get_feature(path2)).item()
-    cos = f"Similarity: {sim:.4f}"
-
-    return cos
-
-
-
-# path1 = './face1.jpg'
-# path2 = './face2.jpg'
-# sim = cosine_similarity(get_feature(path1), get_feature(path2)).item()
-# print(f"Similarity: {sim:.4f}")
+    def similarity(self, path1, path2):
+        emb1 = self.get_feature(path1)
+        emb2 = self.get_feature(path2)
+        sim = cosine_similarity(emb1, emb2).item()
+        return f"Similarity: {sim:.4f}"

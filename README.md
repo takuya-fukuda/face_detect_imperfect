@@ -49,7 +49,7 @@ face_mask_detection をファイチューニングや学習をさせたい場合
 
 ## 顔類似度判定に使用した AI モデル
 
-モデル名：edgeface
+モデル名：edgeface  
 https://github.com/otroshi/edgeface/tree/main
 
 ## コーディング規約
