@@ -50,7 +50,7 @@
 
 （注意）
 
-## 顔検出に使用したモデル
+## 顔検出に使用した AI モデル
 
 MediaPipe が簡単そうなので、使用。  
 https://ai.google.dev/edge/mediapipe/solutions/vision/face_detector/python?hl=ja&_gl=1*gtsxxq*_up*MQ..*_ga*NTAzNjA0MjA3LjE3NDU1ODMxNzU.*_ga_P1DBVKWT6V*MTc0NTU4MzE3NC4xLjAuMTc0NTU4MzIwOC4wLjAuNDEyNDIwMTQ3
