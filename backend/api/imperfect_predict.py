@@ -16,19 +16,19 @@ import time
 basedir = Path(__file__).parent.parent
 logger = logging.getLogger(__name__)
 
-def mask_predict(request):
+def imperfect_predict(request):
     '''前処理'''
     try:
         # 実行開始時間を記録
         start_time = time.time()
-        
-        img_path=None #Except部分でエラーが出るので初期化
-        result_save_path=None #Except部分でエラーが出るので初期化
+
+        #ファイル受け取り
         if 'file' not in request.files:
             return None, None
 
-        # 前処理
         file = request.files['file']
+
+        # 前処理
         img_path, filename = preprocess_default(file)
 
     except Exception as e:

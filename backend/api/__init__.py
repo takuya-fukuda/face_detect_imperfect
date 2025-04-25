@@ -1,7 +1,7 @@
 import json
 import base64
 import re
-from . import mask_predict, face_predict
+from . import imperfect_predict, face_predict
 
 from flask import Blueprint, jsonify, request
 
@@ -14,8 +14,8 @@ def index():
 
 #マスク検出
 @api.route('/image', methods=["POST"])
-def mask():
-    return mask_predict.mask_predict(request)
+def imperfect():
+    return imperfect_predict.imperfect_predict(request)
 
 #顔認証類似度計測
 @api.route('/face', methods=["POST"])
