@@ -26,10 +26,10 @@ def mask_judge(img_path, filename):
 
     if prediction > 0.5:
         print("😷 → マスクなし (NO MASK)")
-        return {"mask": "No Mask", "result_path": img_path}
+        return {"mask": "No Mask"}
     else:
         print("🟢 → マスクあり (MASK)")
-        return {"mask": "Mask", "result_path": img_path}
+        return {"mask": "Mask"}
     
 
     # # OpenCVで画像読み込み（顔検出のため）

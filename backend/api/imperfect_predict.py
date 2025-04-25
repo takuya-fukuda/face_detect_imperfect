@@ -6,6 +6,7 @@ from flask import jsonify
 from .preprocess import preprocess_default
 # from .paddleocr_predict import OCRProcessor
 from api.facemask.facemask_predict import mask_judge
+from api.facedetection.mp_face_detection import detect_faces
 from .error import handle_error
 import logging
 from dotenv import load_dotenv
@@ -17,6 +18,9 @@ basedir = Path(__file__).parent.parent
 logger = logging.getLogger(__name__)
 
 def imperfect_predict(request):
+    img_path=None
+    result_save_path=None
+
     '''前処理'''
     try:
         # 実行開始時間を記録
@@ -24,7 +28,7 @@ def imperfect_predict(request):
 
         #ファイル受け取り
         if 'file' not in request.files:
-            return None, None
+            return jsonify({"file": "None"})
 
         file = request.files['file']
 
@@ -35,9 +39,10 @@ def imperfect_predict(request):
         logger.error("前処理部分での想定外のエラー："+str(e))
         return handle_error("前処理部分での想定外のエラー", img_path, result_save_path), 400
 
-    '''推論：PaddleOCRで推論'''
+    '''推論：MediaPipeとFaceMaskで推論'''
     try:
-        response = mask_judge(img_path, filename)
+        mp_response = detect_faces(img_path)
+        mask_response = mask_judge(img_path, filename)
 
      
     except Exception as e:
@@ -46,13 +51,14 @@ def imperfect_predict(request):
 
     '''後処理'''
     try:
-        result_image_path = response["result_path"]
+        result_image_path = mp_response["output_path"]
         with open(result_image_path, "rb") as img_file:
             encoded_image = base64.b64encode(img_file.read()).decode('utf-8')
 
         result_data = {
             "image" : encoded_image,
-            "mask" : response["mask"]
+            "mask" : "マスクの有無：" + mask_response["mask"],
+            "face_count" : "検出された顔の数：" + str(mp_response["face_count"])
         }
 
         # 実行終了時間を記録

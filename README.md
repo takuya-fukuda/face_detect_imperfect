@@ -12,16 +12,18 @@
 
 ## サービスイメージ例
 
-![判定後](./sample_image1.jpg)
+![判定後](./service_image.jpg)
 
 ## 現在できること
 
 ・マスク判定  
+・顔の有無判定  
+・顔の複数有無  
 ・顔の類似度比較
 
 ### 申込アプリイメージ
 
-![判定後](./sample_image3.jpg)
+![判定後](./sample_image1.jpg)
 
 ### 試験会場やデータセンター
 
@@ -48,6 +50,11 @@
 
 （注意）
 
+## 顔検出に使用したモデル
+
+MediaPipe が簡単そうなので、使用。  
+https://ai.google.dev/edge/mediapipe/solutions/vision/face_detector/python?hl=ja&_gl=1*gtsxxq*_up*MQ..*_ga*NTAzNjA0MjA3LjE3NDU1ODMxNzU.*_ga_P1DBVKWT6V*MTc0NTU4MzE3NC4xLjAuMTc0NTU4MzIwOC4wLjAuNDEyNDIwMTQ3
+
 ## Mask 判定に使用した AI モデル
 
 https://github.com/Karan-Malik/FaceMaskDetector  
@@ -62,7 +69,7 @@ https://github.com/otroshi/edgeface/tree/main
 ## コーディング規約
 
 ◎ オブジェクト指向に関して  
-基本的に単一で処理が終わるものに関しては、def を使用  
+基本的に単一で処理が終わるものに関しては,関数ベースを使用  
 複数の関数が同じデータを使う場合、再利用したい処理が増えてきた場合等に Class を使用すること
 
 ◎ ライブラリのインポート  

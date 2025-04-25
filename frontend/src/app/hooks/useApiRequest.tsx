@@ -47,7 +47,9 @@ export const useApiRequest = (): ApiRequestResult => {
       const base64Image = `data:image/jpeg;base64,${data.image}`;
       setResultImageSrc(base64Image);
       const mask: string = data.mask;
-      setResponseData(mask);
+      const face: string = data.face_count;
+
+      setResponseData(mask + ",  " + face);
       setResultNormalArea(false);
     } catch (error) {
       console.error("Error during POST request:", error);
