@@ -8,6 +8,7 @@ import MultiRequestButton from "./Button/MultiRequestButton";
 const FaceRequestForm = () => {
   const allowedTypes = ["image/jpg", "image/jpeg", "image/png"];
   const maxSize = 10 * 1024 * 1024; // 10MB
+  const [isHidden, setIsHidden] = useState(true);
   const [previewSrcs, setPreviewSrcs] = useState<string[]>([]);
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const [uperrorMessage, setUpErrorMessage] = useState("");
@@ -53,6 +54,8 @@ const FaceRequestForm = () => {
       console.log("APIの返却値:", data);
       setResponseData(data.message);
 
+      setIsHidden(false);
+
       // 必要に応じて画像結果やメッセージをUIへ表示
       // setPreviewSrcs([data.result1, data.result2]) なども可
     } catch (error) {
@@ -75,7 +78,7 @@ const FaceRequestForm = () => {
             <div id="flow" className="uploadAreaFlow">
               <div className="uploadAreaFlow_inner" style={{ display: "flex" }}>
                 <div className="uploadAreaFlow_col">
-                  <p className="uploadAreaFlow_ttl">選択画像</p>
+                  <p className="uploadAreaFlow_ttl">比較画像1</p>
                   <div className="uploadAreaFlow_img">
                     {previewSrcs[0] && (
                       <Image
@@ -91,7 +94,7 @@ const FaceRequestForm = () => {
                 </div>
                 <div className="uploadAreaFlow_arrow"></div>
                 <div className="uploadAreaFlow_col">
-                  <p className="uploadAreaFlow_ttl">選択画像２</p>
+                  <p className="uploadAreaFlow_ttl">比較画像２</p>
                   <div className="uploadAreaFlow_img">
                     <div id="loading" className="uploadAreaLoading">
                       {previewSrcs[1] && (
@@ -119,7 +122,9 @@ const FaceRequestForm = () => {
           </div>
 
           {/* 申込画像作成ボタン */}
-          <MultiRequestButton type="submit" />
+          <div style={{ display: isHidden ? "block" : "none" }}>
+            <MultiRequestButton type="submit" />
+          </div>
         </form>
       </main>
     </div>
