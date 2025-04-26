@@ -66,6 +66,9 @@ face_mask_detection をファイチューニングや学習をさせたい場合
 モデル名：edgeface  
 https://github.com/otroshi/edgeface/tree/main
 
+最近の顔認証の PaperWithCode を読んだ限りでは、GhostFaceNet を使用するべきだが、学習済みモデルがおいていないので
+今後実装。
+
 ## コーディング規約
 
 ◎ オブジェクト指向に関して  
