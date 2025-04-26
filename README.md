@@ -52,7 +52,9 @@
 
 # 顔検出に使用した AI モデル
 
-MediaPipe が簡単そうなので、使用。  
+MediaPipe が簡単そうなので、使用。 ランドマークたくさん取得してたり、今後顔の傾きとか不備判定の点で利用できると思った。  
+単に顔検出という観点であれば、顔認証系のモデルの方がいいと思う。
+
 https://ai.google.dev/edge/mediapipe/solutions/vision/face_detector/python?hl=ja&_gl=1*gtsxxq*_up*MQ..*_ga*NTAzNjA0MjA3LjE3NDU1ODMxNzU.*_ga_P1DBVKWT6V*MTc0NTU4MzE3NC4xLjAuMTc0NTU4MzIwOC4wLjAuNDEyNDIwMTQ3
 
 # Mask 判定に使用した AI モデル
