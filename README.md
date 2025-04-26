@@ -10,11 +10,11 @@
 ・眼鏡検出機能  
 ・顔の類似度比較（替え玉受験対策）
 
-## サービスイメージ例
+# サービスイメージ例
 
 ![判定後](./service_image.jpg)
 
-## 現在できること
+# 現在できること
 
 ・マスク判定  
 ・顔の有無判定  
@@ -30,7 +30,7 @@
 エッジ端末(体温計)とかにカメラをセットして顔の類似度比較  
 ![判定後](./sample_image4.jpg)
 
-## frontend
+# frontend
 
 | 項目           | 内容                |
 | -------------- | ------------------- |
@@ -38,7 +38,7 @@
 | フレームワーク | Next.js             |
 | バージョン     | package.json を参照 |
 
-## backend
+# backend
 
 | 項目           | 内容                   |
 | -------------- | ---------------------- |
@@ -50,18 +50,18 @@
 
 （注意）
 
-## 顔検出に使用した AI モデル
+# 顔検出に使用した AI モデル
 
 MediaPipe が簡単そうなので、使用。  
 https://ai.google.dev/edge/mediapipe/solutions/vision/face_detector/python?hl=ja&_gl=1*gtsxxq*_up*MQ..*_ga*NTAzNjA0MjA3LjE3NDU1ODMxNzU.*_ga_P1DBVKWT6V*MTc0NTU4MzE3NC4xLjAuMTc0NTU4MzIwOC4wLjAuNDEyNDIwMTQ3
 
-## Mask 判定に使用した AI モデル
+# Mask 判定に使用した AI モデル
 
 https://github.com/Karan-Malik/FaceMaskDetector  
 face_mask_detection をファイチューニングや学習をさせたい場合、Python の環境は 3.913 である必要がある。
 また pip install -r requirement.txt でパッケージをインストールしてもエラー出るので、スクリプト流しながら手動でインストールした。
 
-## 顔類似度判定に使用した AI モデル
+# 顔類似度判定に使用した AI モデル
 
 モデル名：edgeface  
 https://github.com/otroshi/edgeface/tree/main
@@ -69,7 +69,7 @@ https://github.com/otroshi/edgeface/tree/main
 最近の顔認証の PaperWithCode を読んだ限りでは、GhostFaceNet を使用するべきだが、学習済みモデルがおいていないので
 今後実装。
 
-## コーディング規約
+# コーディング規約
 
 ◎ オブジェクト指向に関して  
 基本的に単一で処理が終わるものに関しては,関数ベースを使用  
