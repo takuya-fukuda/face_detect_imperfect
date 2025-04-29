@@ -22,10 +22,11 @@ windows11
 
 ## /image レスポンス
 
-| キー  | 型  | 概要                    |
-| ----- | --- | ----------------------- |
-| mask  | str | Mask or No Mask の値    |
-| image | str | base64 エンコードデータ |
+| キー       | 型  | 概要                    |
+| ---------- | --- | ----------------------- |
+| mask       | str | Mask or No Mask の値    |
+| face_count | str | 検出した顔の数          |
+| image      | str | base64 エンコードデータ |
 
 ## /face POST リクエスト
 
