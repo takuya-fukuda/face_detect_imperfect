@@ -30,11 +30,6 @@ Migrate(app, db)
 #CORS
 CORS(app)
 
-#HTTPS化（ローカル）
-#CERTFILE = "/home/tripleize/ssl/cert.pem"  # 自己署名証明書のパス
-#KEYFILE = "/home/tripleize/ssl/key.pem"    # 秘密鍵ファイルのパス
-#context = (CERTFILE, KEYFILE)
-
 # blueprintをアプリケーションに登録
 app.register_blueprint(api)
 

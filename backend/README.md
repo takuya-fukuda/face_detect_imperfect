@@ -89,3 +89,57 @@ Python ファイル名と Flask アプリケーション名：run:app
 | api/facerecognition/\*   | 顔認証に必要な推論スクリプトが格納される                                        |
 | api/postprocess.py       | 後処理用関数定義ファイル。mask_predict から後処理部分で参照される               |
 | api/error.py             | エラーハンドリング用の関数定義ファイル。Except のエラー時に参照される           |
+
+## Posgre のセットアップ
+
+Windows に Posgre をインストールする場合は下記を参考  
+https://qiita.com/tom-sato/items/037b8f8cb4b326710f71  
+https://www.postgresql.org/download/windows/
+
+pgvector の DB 反映　　
+https://qiita.com/sana_bungal/items/13366afb14ee1ebafff8
+
+ライブラリのインストール
+
+```
+pip install psycopg2-binary SQLAlchemy pgvector
+```
+
+psycopg2-binary: PostgreSQL に接続するためのドライバ。  
+SQLAlchemy: ORM（Object-Relational Mapping）ライブラリ。  
+pgvector: SQLAlchemy で pgvector 拡張を使えるようにするライブラリ。
+
+初期セットアップ
+
+```
+$env:FLASK_APP = "run.py"
+$env:CONFIG = "local"
+Remove-Item -Recurse -Force .\migrations
+flask db init
+flask db migrate -m "Initial migration"
+```
+
+SQLShell を使って、DB 接続し pgvector を入れる
+
+```
+CREATE EXTENSION vector;
+```
+
+migrations/versions/\*\_initial_migration.py に pg ベクターを入れる
+
+```
+import pgvector.sqlalchemy
+```
+
+最後にアップグレード
+
+```
+flask db upgrade
+```
+
+今後、モデルを変更する場合
+
+```
+flask db migrate -m "add new column"
+flask db upgrade
+```
