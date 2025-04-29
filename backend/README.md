@@ -90,6 +90,7 @@ Python ファイル名と Flask アプリケーション名：run:app
 | api/preparation.py       | 前処理用関数定義ファイル。各全体処理ファイル の前処理部分で参照される           |
 | api/facemask/\*          | mask 検出に必要な推論スクリプトが格納される                                     |
 | api/facerecognition/\*   | 顔認証に必要な推論スクリプトが格納される                                        |
+| api/facedetection/\*     | 顔検出や複数顔検出に必要な推論スクリプトが格納される                            |
 | api/postprocess.py       | 後処理用関数定義ファイル。各全体処理ファイル の後処理部分で参照される           |
 | api/error.py             | エラーハンドリング用の関数定義ファイル。Except のエラー時に参照される           |
 
