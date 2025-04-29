@@ -7,11 +7,12 @@ windows11
 
 ## アプリケーションルート
 
-| パス                         | 概要                               |
-| ---------------------------- | ---------------------------------- |
-| http://localhost:5000/       | ヘルスチェック用                   |
-| http://localhost:5000/image/ | 顔写真不備判定（現在はマスクのみ） |
-| http://localhost:5000/face/  | 顔類似度判定                       |
+| パス                         | 概要                        |
+| ---------------------------- | --------------------------- |
+| http://localhost:5000/       | ヘルスチェック用            |
+| http://localhost:5000/image/ | 顔写真不備判定（拡張中）    |
+| http://localhost:5000/face/  | 顔類似度判定(２枚画像 POST) |
+| http://localhost:5000/face/  | 顔特徴量 DB 登録            |
 
 ## /image POST リクエスト
 
@@ -84,6 +85,7 @@ Python ファイル名と Flask アプリケーション名：run:app
 | api/**init**.py          | アプリケーションルート設定ファイル                                              |
 | api/imperfect_predict.py | /image/の全体処理が記載されたファイル。前処理 ⇒ 推論 ⇒ 後処理の原則に基づき記載 |
 | api/face_predict.py      | /face/の全体処理が記載されたファイル                                            |
+| api/face_register.py     | /face/register の全体処理が記載されたファイル                                   |
 | api/preparation.py       | 前処理用関数定義ファイル。mask_predict の前処理部分で参照される                 |
 | api/facemask/\*          | mask 検出に必要な推論スクリプトが格納される                                     |
 | api/facerecognition/\*   | 顔認証に必要な推論スクリプトが格納される                                        |
