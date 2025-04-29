@@ -1,7 +1,7 @@
 import json
 import base64
 import re
-from . import imperfect_predict, face_predict
+from . import imperfect_predict, face_predict, face_register
 
 from flask import Blueprint, jsonify, request
 
@@ -21,3 +21,8 @@ def imperfect():
 @api.route('/face', methods=["POST"])
 def face():
     return face_predict.face_predict(request)
+
+#顔特徴量登録
+@api.route('/face/register', methods=["POST"])
+def register():
+    return face_register.face_register(request)
