@@ -96,7 +96,7 @@ Windows に Posgre をインストールする場合は下記を参考
 https://qiita.com/tom-sato/items/037b8f8cb4b326710f71  
 https://www.postgresql.org/download/windows/
 
-pgvector の DB 反映　　
+pgvector の DB 反映  
 https://qiita.com/sana_bungal/items/13366afb14ee1ebafff8
 
 ライブラリのインストール
