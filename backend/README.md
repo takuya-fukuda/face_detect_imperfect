@@ -87,10 +87,10 @@ Python ファイル名と Flask アプリケーション名：run:app
 | api/imperfect_predict.py | /image/の全体処理が記載されたファイル。前処理 ⇒ 推論 ⇒ 後処理の原則に基づき記載 |
 | api/face_predict.py      | /face/の全体処理が記載されたファイル                                            |
 | api/face_register.py     | /face/register の全体処理が記載されたファイル                                   |
-| api/preparation.py       | 前処理用関数定義ファイル。mask_predict の前処理部分で参照される                 |
+| api/preparation.py       | 前処理用関数定義ファイル。各全体処理ファイル の前処理部分で参照される           |
 | api/facemask/\*          | mask 検出に必要な推論スクリプトが格納される                                     |
 | api/facerecognition/\*   | 顔認証に必要な推論スクリプトが格納される                                        |
-| api/postprocess.py       | 後処理用関数定義ファイル。mask_predict から後処理部分で参照される               |
+| api/postprocess.py       | 後処理用関数定義ファイル。各全体処理ファイル の後処理部分で参照される           |
 | api/error.py             | エラーハンドリング用の関数定義ファイル。Except のエラー時に参照される           |
 
 ## Posgre のセットアップ
