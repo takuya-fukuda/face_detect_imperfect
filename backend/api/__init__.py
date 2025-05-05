@@ -1,7 +1,7 @@
 import json
 import base64
 import re
-from . import imperfect_predict, face_register, two_face_predict
+from . import imperfect_predict, face_register, two_face_predict, face_similarity
 
 from flask import Blueprint, jsonify, request
 
@@ -26,3 +26,8 @@ def twoface():
 @api.route('/face/register', methods=["POST"])
 def register():
     return face_register.face_register(request)
+
+#顔特類似度突合（DBあり）
+@api.route('/face/similarity', methods=["POST"])
+def similarity():
+    return face_similarity.face_similarity(request)

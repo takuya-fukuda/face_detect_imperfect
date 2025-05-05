@@ -15,7 +15,8 @@ def face_register(request):
     try:
         '''前処理'''
         file = request.files.get("file")
-        user_id = "test"
+        #user_id = "test"
+        user_id = request.form.get('user_id')
         if not file:
             return jsonify({"error": "画像ファイルとuser_idは必須です"}), 400
         img_path, filename = preprocess_default(file)
