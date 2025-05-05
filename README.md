@@ -30,6 +30,12 @@
 エッジ端末(体温計)とかにカメラをセットして顔の類似度比較  
 ![判定後](./sample_image2.jpg)
 
+顔の特徴量登録  
+![判定後](./postman_sample1.jpg)
+
+顔の類似度判定  
+![判定後](./postman_sample2.jpg)
+
 # frontend
 
 | 項目           | 内容                |
