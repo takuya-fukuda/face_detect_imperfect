@@ -11,7 +11,7 @@ load_dotenv()
 basedir = Path(__file__).parent.parent
 logger = logging.getLogger(__name__)
 
-def face_predict(request):
+def two_face_predict(request):
     try:
         '''前処理'''
         file1 = request.files.get("file1")

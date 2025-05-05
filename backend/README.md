@@ -85,7 +85,7 @@ Python ファイル名と Flask アプリケーション名：run:app
 | api/models.py            | DB 情報の定義ファイル                                                           |
 | api/**init**.py          | アプリケーションルート設定ファイル                                              |
 | api/imperfect_predict.py | /image/の全体処理が記載されたファイル。前処理 ⇒ 推論 ⇒ 後処理の原則に基づき記載 |
-| api/face_predict.py      | /face/の全体処理が記載されたファイル                                            |
+| api/two_face_predict.py  | /face/の全体処理が記載されたファイル                                            |
 | api/face_register.py     | /face/register の全体処理が記載されたファイル                                   |
 | api/preparation.py       | 前処理用関数定義ファイル。各全体処理ファイル の前処理部分で参照される           |
 | api/facemask/\*          | mask 検出に必要な推論スクリプトが格納される                                     |
