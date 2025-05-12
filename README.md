@@ -7,12 +7,11 @@
 
 拡張予定機能  
 ・表情分析機能  
-・眼鏡検出機能  
-・顔の類似度比較（替え玉受験対策）
+・眼鏡検出機能
 
 # サービスイメージ例
 
-![判定後](./service_image.jpg)
+![判定後](./assets/service_image.jpg)
 
 # 現在できること
 
@@ -23,18 +22,18 @@
 
 ### 申込アプリイメージ
 
-![判定後](./sample_image1.jpg)
+![判定後](./assets/sample_image1.jpg)
 
 ### 試験会場やデータセンター
 
 エッジ端末(体温計)とかにカメラをセットして顔の類似度比較  
-![判定後](./sample_image2.jpg)
+![判定後](./assets/sample_image2.jpg)
 
 顔の特徴量登録  
-![判定後](./postman_sample1.jpg)
+![判定後](./assets/postman_sample1.jpg)
 
 顔の類似度判定  
-![判定後](./postman_sample2.jpg)
+![判定後](./assets/postman_sample2.jpg)
 
 # frontend
 
