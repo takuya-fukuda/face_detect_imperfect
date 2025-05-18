@@ -32,6 +32,7 @@ def login():
         return jsonify({"error": "Invalid username or password"}), 401
     
     access_token = create_access_token(identity=str(user.id)) #Configで登録した有効期間と秘密鍵を使用する
+    #以降全てのアプリケーションルートに認証つけたい場合@jwt_required()をつける
 
     return jsonify({"access_token": access_token}), 200
 
