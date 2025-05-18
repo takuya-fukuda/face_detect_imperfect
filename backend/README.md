@@ -7,39 +7,81 @@ windows11
 
 ## アプリケーションルート
 
-| パス                                | 概要                        |
-| ----------------------------------- | --------------------------- |
-| http://localhost:5000/              | ヘルスチェック用            |
-| http://localhost:5000/image/        | 顔写真不備判定（拡張中）    |
-| http://localhost:5000/face/         | 顔類似度判定(２枚画像 POST) |
-| http://localhost:5000/face/register | 顔特徴量 DB 登録            |
+| パス                                  | 概要                        |
+| ------------------------------------- | --------------------------- |
+| http://localhost:5000/                | ヘルスチェック用            |
+| http://localhost:5000/image/          | 顔写真不備判定（拡張中）    |
+| http://localhost:5000/twoface         | 顔類似度判定(２枚画像 POST) |
+| http://localhost:5000/face/register   | 顔特徴量 DB 登録            |
+| http://localhost:5000/face/similarity | 顔特徴量比較                |
 
-## /image POST リクエスト
+## /login リクエスト レスポンス
 
-| body               | 型  |
-| ------------------ | --- |
-| 画像データ(base64) | ?   |
+リクエスト
+| body | 型 |
+| -------- | --- |
+| username | str |
+| password | str |
 
-## /image レスポンス
+レスポンス
+| キー | 型 | 概要 |
+| ------------ | --- | ------------------------------- |
+| access_token | str | JWT トークンの値有効期限 1 時間 |
 
-| キー       | 型  | 概要                    |
+## /image POST リクエスト レスポンス
+
+リクエスト
+| body | 型 |
+| ---- | -------------- |
+| file | 画像(formData) |
+
+レスポンス
+| キー | 型 | 概要 |
 | ---------- | --- | ----------------------- |
-| mask       | str | Mask or No Mask の値    |
-| face_count | str | 検出した顔の数          |
-| image      | str | base64 エンコードデータ |
+| mask | str | Mask or No Mask の値 |
+| face_count | str | 検出した顔の数 |
+| image | str | base64 エンコードデータ |
 
-## /face POST リクエスト
+## /twoface POST リクエスト レスポンス
 
-| body               | 型  |
-| ------------------ | --- |
-| 画像データ(base64) | ?   |
-| 画像データ(base64) | ?   |
+リクエスト
+| body | 型 |
+| ---- | ---- |
+| file | 画像(formData) |
+| file | 画像(formData) |
 
-## /face POST レスポンス
-
-| キー    | 型  | 概要               |
+レスポンス
+| キー | 型 | 概要 |
 | ------- | --- | ------------------ |
 | message | str | コサイン類似度の値 |
+
+## /face/register POST リクエスト レスポンス
+
+リクエスト
+| キー | 型 |
+| ---- | -------------- |
+| file | 画像(formData) |
+| user_id | user_id |
+
+レスポンス
+| キー | 型 | 値 |
+| ------- | --- | ---------------------- |
+| message | str | 顔特徴量を登録しました |
+
+## /face/similarity POST リクエスト レスポンス
+
+リクエスト
+| キー | 型 |
+| ---- | -------------- |
+| file | 画像(formData) |
+| user_id | user_id |
+
+レスポンス
+| キー | 型 | 概要 |
+| ---------- | --- | ---- |
+| id | str | id |
+| user_id | str | id |
+| similarity | str | id |
 
 ## 起動方法
 
@@ -144,6 +186,8 @@ flask db upgrade
 今後、モデルを変更する場合
 
 ```
+$env:FLASK_APP = "run.py"
+$env:CONFIG = "local"
 flask db migrate -m "add new column"
 flask db upgrade
 ```
