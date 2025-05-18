@@ -10,6 +10,7 @@ windows11
 | パス                                  | 概要                        |
 | ------------------------------------- | --------------------------- |
 | http://localhost:5000/                | ヘルスチェック用            |
+| http://localhost:5000/login           | 認証認可（JWT）             |
 | http://localhost:5000/image/          | 顔写真不備判定（拡張中）    |
 | http://localhost:5000/twoface         | 顔類似度判定(２枚画像 POST) |
 | http://localhost:5000/face/register   | 顔特徴量 DB 登録            |
