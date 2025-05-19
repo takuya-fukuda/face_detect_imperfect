@@ -16,7 +16,7 @@ def face_register(request):
         '''前処理'''
         file = request.files.get("file")
         #user_id = "test"
-        user_id = request.form.get('user_id')
+        username = request.form.get("username")
         if not file:
             return jsonify({"error": "画像ファイルとuser_idは必須です"}), 400
         img_path, filename = preprocess_default(file)
@@ -27,7 +27,8 @@ def face_register(request):
 
         '''後処理'''
         #DB定義読み込み
-        new_embedding = FaceEmbedding(user_id=user_id, embedding=embedding_list)
+        #ew_embedding = FaceEmbedding(user_id=user_id, embedding=embedding_list)
+        new_embedding = FaceEmbedding(username=username, embedding=embedding_list)
         db.session.add(new_embedding)
         db.session.commit()
 

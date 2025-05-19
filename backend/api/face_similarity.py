@@ -17,7 +17,7 @@ def face_similarity(request):
         '''前処理'''
         file = request.files.get("file")
         #user_id = "test"
-        user_id = request.form.get('user_id')
+        username = request.form.get("username")
         if not file:
             return jsonify({"error": "画像ファイルとuser_idは必須です"}), 400
         img_path, filename = preprocess_default(file)
@@ -35,10 +35,10 @@ def face_similarity(request):
         # 距離（＝1-類似度）が小さい順、つまり類似度が高い順にソートして上位1件を取得
         stmt = (
             select(
-                FaceEmbedding.id,
+                FaceEmbedding.username,
                 similarity_col
             )
-            .where(FaceEmbedding.user_id == user_id)  # ユーザIDで絞り込み
+            .where(FaceEmbedding.username== username)  # ユーザIDでフィルタリング
             .order_by(distance_col)                   # 距離（1-類似度）が小さい順
             .limit(1)                                 # 上位1件のみ
         )
@@ -48,10 +48,10 @@ def face_similarity(request):
             return jsonify({"message": "該当ユーザのデータが見つかりません"}), 404
 
         # --- レスポンス整形 ---
-        record_id, sim = result.id, float(result.similarity)
+        # record_id, sim = result.id, float(result.similarity)
+        sim = float(result.similarity)
         return jsonify({
-            "id": record_id,
-            "user_id": user_id,
+            "username": username,
             "similarity": sim
         }), 200
 
