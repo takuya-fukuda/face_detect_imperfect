@@ -192,3 +192,12 @@ $env:CONFIG = "local"
 flask db migrate -m "add new column"
 flask db upgrade
 ```
+
+upgrade で「NameError: name 'pgvector' is not defined」が出る場合
+
+```
+from pgvector.sqlalchemy import Vector
+
+sa.Column('embedding', pgvector.sqlalchemy.vector.VECTOR(dim=512), nullable=True),部分を下記に変更
+sa.Column('embedding', Vector(512), nullable=False),
+```
