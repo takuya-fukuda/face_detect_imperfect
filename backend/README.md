@@ -93,11 +93,23 @@ windows11
 sudo apt-get install git
 
 4.仮想環境の作成
+venv で作成する場合
+
+```
 python3.10 -m venv [your_env_name]
-
 cd [your_env_name]
-
 source bin/activate
+```
+
+uv で作成する場合
+
+```
+uv venv [your_env_name]
+cd ./[your_env_name]/Scripts
+.\activate.ps1
+uv pip install -r requirements.txt
+python run.py
+```
 
 ## 本番セットアップ
 
