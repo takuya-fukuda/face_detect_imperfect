@@ -92,7 +92,7 @@ windows11
 3.git のインストール
 sudo apt-get install git
 
-4.仮想環境の作成
+4.仮想環境の作成  
 venv で作成する場合
 
 ```
