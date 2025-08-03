@@ -3,7 +3,7 @@ import shutil
 import base64
 from pathlib import Path
 from flask import jsonify
-from .preprocess import preprocess_default
+from .preprocess import PreProcess
 # from .paddleocr_predict import OCRProcessor
 from api.facemask.facemask_predict import mask_judge
 from api.facedetection.mp_face_detection import detect_faces
@@ -33,7 +33,8 @@ def imperfect_predict(request):
         file = request.files['file']
 
         # 前処理
-        img_path, filename = preprocess_default(file)
+        preprocess = PreProcess(file)
+        img_path, filename = preprocess.preprocess_default(file)
 
     except Exception as e:
         logger.error("前処理部分での想定外のエラー："+str(e))

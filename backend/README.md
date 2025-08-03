@@ -213,3 +213,9 @@ from pgvector.sqlalchemy import Vector
 sa.Column('embedding', pgvector.sqlalchemy.vector.VECTOR(dim=512), nullable=True),部分を下記に変更
 sa.Column('embedding', Vector(512), nullable=False),
 ```
+
+ユーザデータの直接登録(Posger の SQLShell)
+
+```
+
+```

@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 from flask import request, jsonify
-from .preprocess import preprocess_default
+from .preprocess import PreProcess
 from api.facerecognition.face_recognition import FaceRecognizer
 from werkzeug.utils import secure_filename
 from api.models import db, FaceEmbedding
@@ -19,7 +19,8 @@ def face_register(request):
         username = request.form.get("username")
         if not file:
             return jsonify({"error": "画像ファイルとuser_idは必須です"}), 400
-        img_path, filename = preprocess_default(file)
+        preprocess = PreProcess(file)
+        img_path, filename = preprocess.preprocess_default(file)
 
         '''推論'''
         embedding_tensor = recognizer.get_feature(img_path)

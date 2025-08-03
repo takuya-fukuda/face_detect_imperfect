@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 from flask import jsonify
-from .preprocess import preprocess_default
+from .preprocess import PreProcess
 #from api.facerecognition.face_recognition import face_similarity
 from api.facerecognition.face_recognition import FaceRecognizer
 import logging
@@ -19,9 +19,11 @@ def two_face_predict(request):
 
         if not file1 or not file2:
             return jsonify({"error": "2つのファイルが必要です"}), 400
-        
-        img_path, filename = preprocess_default(file1)
-        img_path2, filename2 = preprocess_default(file2)
+
+        preprocess = PreProcess(file1)
+        img_path, filename = preprocess.preprocess_default(file1)
+        preprocess = PreProcess(file2)
+        img_path2, filename2 = preprocess.preprocess_default(file2)
 
         '''推論'''
         #res = face_similarity(img_path, img_path2)
