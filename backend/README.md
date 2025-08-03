@@ -217,5 +217,6 @@ sa.Column('embedding', Vector(512), nullable=False),
 ユーザデータの直接登録(Posger の SQLShell)
 
 ```
-
+INSERT INTO users (username, password) VALUES ('sample0', 'パスワードハッシュ値');
+SELECT * FROM users;
 ```
