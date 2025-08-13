@@ -20,10 +20,9 @@ def two_face_predict(request):
         if not file1 or not file2:
             return jsonify({"error": "2つのファイルが必要です"}), 400
 
-        preprocess = PreProcess(file1)
-        img_path, filename = preprocess.preprocess_default(file1)
-        preprocess = PreProcess(file2)
-        img_path2, filename2 = preprocess.preprocess_default(file2)
+        preprocess = PreProcess()
+        img_path, filename = preprocess.preprocess_twoface(file1)
+        img_path2, filename2 = preprocess.preprocess_twoface(file2)
 
         '''推論'''
         #res = face_similarity(img_path, img_path2)

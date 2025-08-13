@@ -10,17 +10,14 @@ import logging
 basedir = Path(__file__).parent.parent
 logger = logging.getLogger(__name__)
 recognizer = FaceRecognizer()
+preprocess = PreProcess()
 
 def face_register(request):
     try:
         '''前処理'''
-        file = request.files.get("file")
         #user_id = "test"
         username = request.form.get("username")
-        if not file:
-            return jsonify({"error": "画像ファイルとuser_idは必須です"}), 400
-        preprocess = PreProcess(file)
-        img_path, filename = preprocess.preprocess_default(file)
+        img_path, filename = preprocess.preprocess_default(request)
 
         '''推論'''
         embedding_tensor = recognizer.get_feature(img_path)

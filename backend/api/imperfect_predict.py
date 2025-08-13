@@ -7,7 +7,7 @@ from .preprocess import PreProcess
 # from .paddleocr_predict import OCRProcessor
 from api.facemask.facemask_predict import mask_judge
 from api.facedetection.mp_face_detection import detect_faces
-from .error import handle_error
+from .error import handle_error, AppError
 import logging
 from dotenv import load_dotenv
 load_dotenv()
@@ -16,6 +16,7 @@ import time
 
 basedir = Path(__file__).parent.parent
 logger = logging.getLogger(__name__)
+preprocess = PreProcess()
 
 def imperfect_predict(request):
     img_path=None
@@ -26,19 +27,16 @@ def imperfect_predict(request):
         # 実行開始時間を記録
         start_time = time.time()
 
-        #ファイル受け取り
-        if 'file' not in request.files:
-            return jsonify({"file": "None"})
-
-        file = request.files['file']
-
         # 前処理
-        preprocess = PreProcess(file)
-        img_path, filename = preprocess.preprocess_default(file)
+        img_path, filename = preprocess.preprocess_default(request)
+
+    except AppError as e:
+        logging.exception("app error")
+        return jsonify({"error": e.message}), e.http_status    
 
     except Exception as e:
         logger.error("前処理部分での想定外のエラー："+str(e))
-        return handle_error("前処理部分での想定外のエラー", img_path, result_save_path), 400
+        return handle_error(str(e), img_path, result_save_path), 400
 
     '''推論：MediaPipeとFaceMaskで推論'''
     try:

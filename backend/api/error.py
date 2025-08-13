@@ -10,3 +10,9 @@ def handle_error(message, img_path, result_save_path):
         os.remove(result_save_path)
 
     return jsonify({"message": message})
+
+class AppError(Exception):
+    def __init__(self, message: str, stt: int, http_status: int = 400):
+        super().__init__(message)
+        self.http_status = http_status
+        self.message = message

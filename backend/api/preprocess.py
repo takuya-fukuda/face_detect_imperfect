@@ -7,15 +7,17 @@ import pillow_heif
 from PIL import Image
 import uuid
 import logging
+from .error import AppError
 
-basedir = Path(__file__).parent.parent
 logger = logging.getLogger(__name__)
 
 
 class PreProcess:
-    def __init__(self, file):
-        self.file = file
-        self.img_path = None
+    def __init__(self):
+        self.basedir = Path(__file__).parent.parent
+
+    def __call__(self, request):
+        return self.preprocess_default(request)
 
     def load_image(self, file):
         try:
@@ -25,7 +27,7 @@ class PreProcess:
                 return None, None
 
             filename = file.filename
-            img_path = str(basedir / "data" / "input" /filename)
+            img_path = str(self.basedir / "data" / "input" /filename)
             file.save(img_path)
 
             return img_path, filename
@@ -64,51 +66,79 @@ class PreProcess:
 
         return new_filename
 
-    def preprocess_default(self, file):
-        try:
-            if file.filename == '' or file is None:
-                return None, None
-            filename = file.filename
-            img_path = str(basedir / "data" / "input" /filename)
-            file.save(img_path)
+    def preprocess_default(self, request):
 
-            # ファイルのロードに失敗した場合の処理
-            if img_path is None:
-                logger.error("ファイルが空です")
-                return jsonify({"message": 'ファイルが空です'}), 400
+        #ファイル受け取り
+        if 'file' not in request.files:
+            raise AppError("ファイルが選択されていません", http_status=400)
+                
+        file = request.files['file']
+        filename = file.filename
+        img_path = str(self.basedir / "data" / "input" / filename )
+        file.save(img_path)
 
-            # ファイル名チェック
-            if filename == '' or filename is None:
-                logger.error("ファイル名が空です")
-                return jsonify({"message": 'ファイル名が空です'}), 400
-            
-            #拡張子チェック
-            ext = self.extension_split(img_path)
-            logger.info("拡張子:" + ext)
-            if ext.lower() not in [".jpeg", ".jpg", ".png", ".heic"]:
-                logger.error('AIがファイル拡張子に対応していません')
-                return jsonify({"message": 'AIがファイル拡張子に対応していません'}), 400
-            
-            #拡張子チェック
-            ext = self.extension_split(img_path)
-            logger.info("拡張子:" + ext)
-            if ext.lower() not in [".jpeg", ".jpg", ".png", ".heic"]:
-                logger.error('AIがファイル拡張子に対応していません')
-                return jsonify({"message": 'AIがファイル拡張子に対応していません'}), 400        
+        # ファイルのロードに失敗した場合の処理
+        if img_path is None:
+            logger.error("ファイルが空です")
+            raise AppError('ファイルが空です', http_status=400)
 
-            #HEICのJPEG変換
-            if ext == ".HEIC":
-                img_path = self.heic_convert(img_path)
-                logger.info("from heic to jpeg:" + img_path)
+        # ファイル名チェック
+        if filename == '' or filename is None:
+            logger.error("ファイル名が空です")
+            raise AppError('ファイル名がありません', http_status=400)
+        
+        #拡張子チェック
+        ext = self.extension_split(img_path)
+        logger.info("拡張子:" + ext)
+        if ext.lower() not in [".jpeg", ".jpg", ".png", ".heic"]:
+            logger.error('AIがファイル拡張子に対応していません')
+            raise AppError("ファイルが拡張子に対応していません", http_status=400)
 
-            #ファイル名の変更と上書き
-            img_path = self.filename_convert(img_path)
-            logger.info("file rename " + img_path)        
+        #HEICのJPEG変換
+        if ext == ".HEIC":
+            img_path = self.heic_convert(img_path)
+            logger.info("from heic to jpeg:" + img_path)
 
-            return img_path, filename
+        #ファイル名の変更と上書き
+        img_path = self.filename_convert(img_path)
+        logger.info("file rename " + img_path)        
 
-        except Exception as e:
-            raise(e)
+        return img_path, filename
+    
+    def preprocess_twoface(self, file):
+        filename = file.filename
+        img_path = str(self.basedir / "data" / "input" /filename)
+        file.save(img_path)
+
+        # ファイルのロードに失敗した場合の処理
+        if img_path is None:
+            logger.error("ファイルが空です")
+            raise AppError('ファイルが空です', http_status=400)
+
+        # ファイル名チェック
+        if filename == '' or filename is None:
+            logger.error("ファイル名が空です")
+            raise AppError('ファイル名がありません', http_status=400)
+        
+        #拡張子チェック
+        ext = self.extension_split(img_path)
+        logger.info("拡張子:" + ext)
+        if ext.lower() not in [".jpeg", ".jpg", ".png", ".heic"]:
+            logger.error('AIがファイル拡張子に対応していません')
+            raise AppError("ファイルが拡張子に対応していません", http_status=400)
+
+        #HEICのJPEG変換
+        if ext == ".HEIC":
+            img_path = self.heic_convert(img_path)
+            logger.info("from heic to jpeg:" + img_path)
+
+        #ファイル名の変更と上書き
+        img_path = self.filename_convert(img_path)
+        logger.info("file rename " + img_path)        
+
+        return img_path, filename
+
+
 
 
 
