@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  api:
+    container_name: base-api-container
+    image: base-api-image
+    build:
+      context: .. # ← 親ディレクトリ（flask_api がある場所）
+      dockerfile: docker/Dockerfile # ← context（..）から見た Dockerfile の相対パス
+      # args:                      # ← ビルド引数があればここに追加
+      #   APP_ENV: production
+    ports:
+      - "5000:5000"
+    restart: always
