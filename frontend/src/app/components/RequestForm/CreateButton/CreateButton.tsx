@@ -17,7 +17,7 @@ const CreateButton: React.FC<CreateButtonProps> = ({
         style={{ display: createButtonVisible ? "none" : "block" }}
       >
         <button id="uploadBtnInput" type={type} className="btnBlue">
-          申込用顔写真を作成する
+          申請用に加工
         </button>
       </div>
     </div>

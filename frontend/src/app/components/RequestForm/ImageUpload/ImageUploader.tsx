@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 
 interface ImageUploaderProps {
@@ -15,6 +15,11 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
   onError,
 }) => {
   const [isUploadButtonVisible, setIsUploadButtonVisible] = useState(true);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleButtonClick = () => {
+    fileInputRef.current?.click();
+  };
 
   const handleFileChange = (input: HTMLInputElement) => {
     if (input.files && input.files[0]) {
@@ -49,13 +54,6 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
 
         const img = new globalThis.Image();
         img.onload = () => {
-          // if (img.width < 413 || img.height < 531) {
-          //   onError(
-          //     "写真の解像度が低いです。画像の横幅が最低413px、縦幅が最低531px必要です。"
-          //   );
-          //   return;
-          // }
-
           // アップロード成功
           onImageUpload(result, file); // ファイルも渡す
           setIsUploadButtonVisible(false); // ボタンを非表示にする
@@ -69,21 +67,22 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
   return (
     <>
       {isUploadButtonVisible && (
-        <label htmlFor="upfile" className="uploadAreaBtn">
-          <Image
-            src="/img/ic_photo.svg"
-            width={21}
-            height={20}
-            className="icon-photo"
-            alt=""
-          />
-          画像を選択
+        <>
+          <button
+            type="button"
+            className="uploadAreaBtn"
+            onClick={handleButtonClick}
+          >
+            画像を選択
+          </button>
           <input
             type="file"
             id="upfile"
+            ref={fileInputRef}
+            style={{ display: "none" }}
             onChange={(e) => handleFileChange(e.target as HTMLInputElement)}
           />
-        </label>
+        </>
       )}
     </>
   );
