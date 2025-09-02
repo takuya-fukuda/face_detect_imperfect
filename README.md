@@ -110,3 +110,42 @@ https://github.com/otroshi/edgeface/tree/main
 
 ◎ 型定義  
 Python であっても、関数を使用する場合は、極力型定義が分かるような記載方式にすること。
+
+◎ 命名規則  
+極力下記に従う
+
+| 種類       | 記法       |
+| ---------- | ---------- |
+| モジュール | snake_case |
+| クラス     | CamelCase  |
+| 関数　     | snake_case |
+| 変数       | snake_case |
+| 定数       | UPPER_CASE |
+
+◎ 再利用性  
+一度実装した処理を関数として定義すれば、他の場所でも簡単に再利用可能。（DRY）
+
+◎ 処理の名前付けと詳細の隠蔽  
+処理の名前付けと、最初に記載するコメントでコードの可読性を上げる
+
+◎ 参照透過性
+同じ入力に対して、常に同じ出力（戻り値）を返す関数を作成すること  
+悪い例
+
+```
+tax_rate=0.1
+
+def calculate_price_with_tax_rate(price: float) -> float:
+    """税込み価格を計算する"""
+    #外部の状態であるtax_rateに依存する
+    return price*(1+tax_rate)
+```
+
+参照透過性を持つ関数
+
+```
+def calculate_price_with_tax_rate(price: float, tax_rate: float) -> float:
+    """税込み価格を計算する"""
+    #引数のみに依存している
+    return price*(1+tax_rate)
+```
